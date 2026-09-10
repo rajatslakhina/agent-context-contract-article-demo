@@ -80,7 +80,7 @@ public struct ContextContractDemoView: View {
                 }
             }
         }
-        .listStyle(.insetGrouped)
+        .groupedListStyle()
     }
 
     private var sections: [String] {
@@ -168,7 +168,7 @@ public struct ContextContractDemoView: View {
                 }
             }
         }
-        .listStyle(.insetGrouped)
+        .groupedListStyle()
     }
 
     private func support(_ s: ContextFileSupport?) -> String {
@@ -249,6 +249,17 @@ struct DirectiveRow: View {
         case .vendorOverlay: return .orange
         case .protocolLayer: return .red
         }
+    }
+}
+
+private extension View {
+    /// `.insetGrouped` is iOS-only; macOS falls back to the default list style so the package builds there too.
+    @ViewBuilder func groupedListStyle() -> some View {
+        #if os(iOS)
+        listStyle(.insetGrouped)
+        #else
+        self
+        #endif
     }
 }
 
