@@ -13,7 +13,7 @@ Article: (added after publish)
 
 ## Why
 
-Xcode 27 (release candidate, 9 September 2026) adds *Settings ▸ Intelligence ▸ Add an Agent…*:
+Xcode 27 (release candidate, 9 September 2026) ships *Settings ▸ Intelligence ▸ Add an Agent…*, first seen in the June betas:
 any binary that speaks the [Agent Client Protocol](https://agentclientprotocol.com) runs inside
 Xcode as a subprocess, next to the Claude, Codex and Gemini agents Apple wired in itself. ACP's
 `session/new` carries the editor's MCP server list, so tool servers follow you across agents.
@@ -46,8 +46,9 @@ day someone picks a different item in that dropdown, the file you wrote is not r
   (`@./AGENTS.md` + Gemini lines), overlay files for Cursor/Copilot only when they have lines, and
   `ENFORCEMENT.md` (one row per claim, the layer it moves to, status *not enforced*).
 - `Coverage` — how many directives reach each agent, as written vs compiled.
-- `Fixture.claudeMD` — a realistic 28-line CLAUDE.md for a SwiftUI app. Every number below comes
-  from scanning exactly this text; the tests pin them.
+- `Fixture.claudeMD` — a realistic CLAUDE.md for a SwiftUI app: 28 directives across three sections
+  (38 lines including headings and blanks). Every number below comes from scanning exactly this text;
+  the tests pin them.
 - `ContextContractDemoView` — SwiftUI: Scan (three tiles, lock-in score, every line with its badge
   and matched evidence), Files (the compiled files), Coverage (before/after per agent), and an
   editor sheet so you can paste your own file.
@@ -116,13 +117,14 @@ natively as of August 2026, hence the `@AGENTS.md` shim.
 ```bash
 git clone https://github.com/rajatslakhina/agent-context-contract-article-demo.git
 cd agent-context-contract-article-demo
-swift test          # 25 tests, Linux or macOS
+swift test          # 25 tests, Linux or macOS (the iOS-only list style is guarded with #if os(iOS))
 open Demo.xcodeproj # pick the Demo scheme, an iPhone Simulator, Build & Run
 ```
 
 No other setup: `Demo.xcodeproj` consumes the library through a local package reference to this
-same folder. `make_images_2026-09-10.py` (Pillow) regenerates the four article figures in `Article/`
-from the same numbers.
+same folder. `make_images_2026-09-10.js` renders the four article figures in `Article/` as SVG on an HTML
+canvas (that is how the committed PNGs were produced); `make_images_2026-09-10.py` is the Pillow
+equivalent of the same layout, from the same numbers.
 
 ## Verification status
 
@@ -136,6 +138,7 @@ from the same numbers.
 - Marc Nuri — [Agent Client Protocol (ACP): the LSP for AI coding agents](https://blog.marcnuri.com/agent-client-protocol-acp-introduction)
 - Reda Lemeden — [How to use OpenCode in Xcode 27](https://redalemeden.com/derived-data/2026/how-to-use-any-harness-with-xcode-27/) (the *Add an Agent…* setting)
 - ACP — [Session setup](https://agentclientprotocol.com/protocol/session-setup)
-- Gemini CLI — [Memory import processor](https://github.com/google-gemini/gemini-cli/blob/main/docs/core/memport.md)
+- Gemini CLI — [Memory import processor](https://github.com/google-gemini/gemini-cli/blob/main/docs/reference/memport.md) (`@./file.md` imports; the `context.fileName` setting lives in the CLI configuration reference)
+- Claude Code — [Memory / CLAUDE.md imports](https://docs.claude.com/en/docs/claude-code/memory)
 
 MIT.
