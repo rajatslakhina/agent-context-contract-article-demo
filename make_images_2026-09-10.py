@@ -44,11 +44,11 @@ def header():
     d.text((80,120),"Your CLAUDE.md was written",font=f(FB,62),fill=INK)
     d.text((80,195),"for one agent.",font=f(FB,62),fill=INK)
     d.text((80,270),"Xcode 27 just made the agent a dropdown.",font=f(FB,54),fill=RED)
-    d.text((80,360),"A realistic 28-line CLAUDE.md, scanned. Codex reads 0 of the 28: it opens AGENTS.md, and never opens CLAUDE.md.",font=f(F,23),fill=MUTED)
+    d.text((80,360),"A realistic CLAUDE.md with 28 directives, scanned. Codex reads 0 of the 28: it opens AGENTS.md, and never opens CLAUDE.md.",font=f(F,23),fill=MUTED)
     d.text((80,393),"ACP forwards your MCP servers to whichever agent you pick. It does not forward your instructions.",font=f(F,23),fill=MUTED)
     y=470
     boxes=[(80,f"{PORTABLE} / {TOTAL}","portable → AGENTS.md","any agent can act on them as written; 43% of the file",GREEN,GREENL),
-           (590,f"{VENDOR} / {TOTAL}","vendor-bound → overlays","7 Claude · 1 Codex · 1 Gemini: tool names, slash commands, .claude/ paths, model names",AMBER,AMBERL),
+           (590,f"{VENDOR} / {TOTAL}","vendor-bound → overlays","7 Claude · 1 Codex · 1 Gemini: tool names, slash commands, .claude/ paths, models",AMBER,AMBERL),
            (1100,f"{ENFORCE} / {TOTAL}","enforced by prose → permission layer","every line under ## Rules; exactly one is enforced today, by a Claude-only hook",RED,REDL)]
     for x,n,t1,t2,c,bg in boxes:
         card(d,(x,y,x+420,y+320),fill=bg,outline=bg)
