@@ -7,7 +7,7 @@ to enforce something prose cannot enforce. Then it compiles the file into a vend
 contract plus per-vendor overlays plus an enforcement plan, and reports which agents can read
 each version.
 
-Article: (added after publish)
+Article: [Xcode 27 Made Your Coding Agent a Dropdown. I Scanned a CLAUDE.md: 0 of 28 Lines Reach the Next Agent.](https://medium.com/@er.rajatlakhina/xcode-27-made-your-coding-agent-a-dropdown-a1f020e8346b) (Medium)
 
 ![Diagram: one CLAUDE.md with 28 lines splits into 12 portable lines (to AGENTS.md), 9 vendor-bound lines (to CLAUDE.md, GEMINI.md and a Codex heading) and 7 enforcement claims (to ENFORCEMENT.md and the permission layer)](Article/2026-09-10-agent-context-contract-split.png)
 
@@ -117,7 +117,7 @@ natively as of August 2026, hence the `@AGENTS.md` shim.
 ```bash
 git clone https://github.com/rajatslakhina/agent-context-contract-article-demo.git
 cd agent-context-contract-article-demo
-swift test          # 25 tests, Linux or macOS (the iOS-only list style is guarded with #if os(iOS))
+swift test          # 25 tests (verified on Linux; macOS not exercised in this run)
 open Demo.xcodeproj # pick the Demo scheme, an iPhone Simulator, Build & Run
 ```
 
@@ -128,7 +128,7 @@ equivalent of the same layout, from the same numbers.
 
 ## Verification status
 
-- `swift build`: 0 warnings, `swift test`: 25/25 on Swift 6.0.3, Linux aarch64.
+- `swift build`: 0 warnings, `swift test`: 25/25 on Swift 6.0.3, Linux aarch64. `DemoView.swift` is SwiftUI-only (`#if canImport(SwiftUI)`), so the Linux build covers the six non-UI files; the view was reviewed by hand and its two iOS-only calls sit behind `#if os(iOS)`.
 - `Demo.xcodeproj/project.pbxproj`: hand-authored, braces 32/32, parens 24/24, 22 object ids, no dangling references; shared `Demo` scheme committed.
 - **Simulator run: not completed.** This repo was produced by an unattended scheduled session in which the computer-use grant for Xcode/Simulator could not be approved, so the app was never launched and there is no screenshot (`Demo/Screenshots/README.md` says the same). `ContextContractDemoView` was reviewed by hand against the iOS 17 SwiftUI APIs it uses.
 
